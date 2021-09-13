@@ -10,5 +10,5 @@ app.use(express.json());
 app.use(routes);
 
 
-
+console.log(process.env)
 app.listen(process.env.PORT);
