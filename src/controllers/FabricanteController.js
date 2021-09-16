@@ -1,7 +1,7 @@
 const Fabricante = require("../models/Fabricante");
 
 module.exports = {
-  async index(req, res) {
+  async index(_req, res) {
     const fabricantes = await Fabricante.findAll();
     return res.json(fabricantes);
   },

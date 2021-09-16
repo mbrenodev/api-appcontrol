@@ -84,10 +84,9 @@ routes.post("/usuariologin", UsuarioLoginController.store);
 routes.put("/usuariologin/:login_id", UsuarioLoginController.update);
 routes.delete("/usuariologin/:login_id", UsuarioLoginController.delete);
 
-routes.get("/usuarios", UsuarioController.index);
-routes.post("/usuarios", UsuarioController.store);
+routes.get("/usuarios?", UsuarioController.index);
+routes.post("/usuarios?", UsuarioController.store);
 routes.put("/usuario/:usuario_id", UsuarioController.update);
 routes.delete("/usuario/:usuario_id", UsuarioController.delete);
-
 
 module.exports = routes;
