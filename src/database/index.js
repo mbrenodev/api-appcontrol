@@ -13,6 +13,7 @@ const UnidadeMedida = require('../models/UnidadeMedida');
 const UsuarioLogin = require('../models/UsuarioLogin');
 const UsuarioPrivilegio = require('../models/UsuarioPrivilegio');
 const Programa = require('../models/Programa');
+const NfceXml = require('../models/NfceXml');
 
 const connection = new Sequelize(dbConfig)
 
@@ -20,6 +21,7 @@ Genero.init(connection);
 Usuario.init(connection);
 Tributo.init(connection);
 Programa.init(connection);
+NfceXml.init(connection);
 Fabricante.init(connection);
 GrupoProduto.init(connection);
 UsuarioLogin.init(connection);

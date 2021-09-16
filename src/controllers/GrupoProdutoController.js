@@ -1,7 +1,7 @@
 const GrupoProduto = require("../models/GrupoProduto");
 
 module.exports = {
-  async index(req, res) {
+  async index(_req, res) {
     const grupoproduto = await GrupoProduto.findAll();
     return res.json(grupoproduto);
   },
