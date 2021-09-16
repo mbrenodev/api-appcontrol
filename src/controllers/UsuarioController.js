@@ -1,3 +1,4 @@
+const { Error } = require("sequelize");
 const Usuario = require("../models/Usuario");
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
     }
   },
 
-  async store(req, res) {
+  async store(req, res, next) {
     try {
       const {
         identificacao,
@@ -36,12 +37,12 @@ module.exports = {
         vendedor_id,
       });
       return res.json(usuario);
-    } catch (err) {
-      return res.status(400).send({ error: err.message });
+    } catch (error) {
+      next(error)
     }
   },
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       const { usuario_id } = req.params;
       const usuario = await Usuario.findByPk(usuario_id);
@@ -53,11 +54,11 @@ module.exports = {
       await usuario.destroy(usuario_id);
       return res.json();
     } catch (error) {
-      return res.status(300).send(error);
+      next(error)
     }
   },
 
-  async update(req, res) {
+  async update(req, res, next) {
     try {
       const { usuario_id } = req.params;
       const {
@@ -96,7 +97,7 @@ module.exports = {
       );
       return res.json(usuario);
     } catch (error) {
-      return res.status(300).send(error);
+      next(error)
     }
   },
 };
