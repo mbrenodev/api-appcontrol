@@ -1,72 +1,66 @@
 const Usuario = require("../models/Usuario");
 
 module.exports = {
-  async index(req, res) {
-    const usuarios = await Usuario.findAll();
-    return res.json(usuarios);
-  },
-
-  async store(req, res) {
-    const {
-      identificacao,
-      senha,
-      sup: any, //é preciso alterar o nome da field pois super é uma palavra reservada.
-      ativo,
-      dica,
-      dataexpiracaosenha,
-      codig_fun,
-      cliente_id,
-      vendedor_id,
-    } = req.body;
-
-    const usuario = await Usuario.create({
-      identificacao,
-      senha,
-      sup: any, //é preciso alterar o nome da field pois super é uma palavra reservada.
-      ativo,
-      dica,
-      dataexpiracaosenha,
-      codig_fun,
-      cliente_id,
-      vendedor_id,
-    });
-    return res.json(usuario);
-  },
-
-  async delete(req, res) {
-    const { usuario_id } = req.params;
-    const usuario = await Usuario.findByPk(usuario_id);
-
-    if (!usuario) {
-      return res.status(400).json({ error: "Usuário não encontrado" });
+  async index(_req, res, next) {
+    try {
+      const usuarios = await Usuario.findAll();
+      return res.json(usuarios);
+    } catch (err) {
+      next(err)
     }
-
-    await usuario.destroy(usuario_id);
-    return res.json();
   },
 
-  async update(req, res) {
-    const { usuario_id } = req.params;
-    const {
-      identificacao,
-      senha,
-      sup: any,
-      ativo,
-      dica,
-      dataexpiracaosenha,
-      codig_fun,
-      cliente_id,
-      vendedor_id,
-    } = req.body;
+  async store(req, res, next ) {
+    try {
+      const {
+        identificacao,
+        senha,
+        sup: any, //é preciso alterar o nome da field pois super é uma palavra reservada.
+        ativo,
+        dica,
+        dataexpiracaosenha,
+        codig_fun,
+        cliente_id,
+        vendedor_id,
+      } = req.body;
 
-    const usuario = await Usuario.findByPk(usuario_id);
-
-    if (!usuario) {
-      return res.status(400).json({ error: "Usuário não encontrado" });
+      const usuario = await Usuario.create({
+        identificacao,
+        senha,
+        sup: any, //é preciso alterar o nome da field pois super é uma palavra reservada.
+        ativo,
+        dica,
+        dataexpiracaosenha,
+        codig_fun,
+        cliente_id,
+        vendedor_id,
+      });
+      return res.json(usuario);
+    } catch (err) {
+      next(err)
     }
+  },
 
-    await usuario.update(
-      {
+  async delete(req, res, next) {
+    try {
+      const { usuario_id } = req.params;
+      const usuario = await Usuario.findByPk(usuario_id);
+
+      if (!usuario) {
+        return res.status(400).json({ error: "Usuário não encontrado" });
+      }
+
+      await usuario.destroy(usuario_id);
+      return res.json();
+    } catch (err) {
+      next(err)
+    }
+  },
+
+  async update(req, res, next) {
+    try {
+      const { usuario_id } = req.params;
+      const {
         identificacao,
         senha,
         sup: any,
@@ -76,12 +70,33 @@ module.exports = {
         codig_fun,
         cliente_id,
         vendedor_id,
-      },
-      {
-        where: { usuario_id: usuario_id },
-      }
-    );
+      } = req.body;
 
-    return res.json(usuario);
+      const usuario = await Usuario.findByPk(usuario_id);
+
+      if (!usuario) {
+        return res.status(400).json({ error: "Usuário não encontrado" });
+      }
+
+      await usuario.update(
+        {
+          identificacao,
+          senha,
+          sup: any,
+          ativo,
+          dica,
+          dataexpiracaosenha,
+          codig_fun,
+          cliente_id,
+          vendedor_id,
+        },
+        {
+          where: { usuario_id: usuario_id },
+        }
+      );
+      return res.json(usuario);
+    } catch (err) {
+      next(err)
+    }
   },
 };
