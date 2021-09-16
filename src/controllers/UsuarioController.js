@@ -38,7 +38,7 @@ module.exports = {
       });
       return res.json(usuario);
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 
@@ -54,7 +54,7 @@ module.exports = {
       await usuario.destroy(usuario_id);
       return res.json();
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 
@@ -97,7 +97,7 @@ module.exports = {
       );
       return res.json(usuario);
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 };
