@@ -5,8 +5,8 @@ module.exports = {
     try {
       const usuarios = await Usuario.findAll();
       return res.json(usuarios);
-    } catch (err) {
-      next(err)
+    } catch (error) {
+      next(error)
     }
   },
 
@@ -36,8 +36,8 @@ module.exports = {
         vendedor_id,
       });
       return res.json(usuario);
-    } catch (err) {
-      next(err)
+    } catch (error) {
+      next(error)
     }
   },
 
@@ -52,8 +52,8 @@ module.exports = {
 
       await usuario.destroy(usuario_id);
       return res.json();
-    } catch (err) {
-      next(err)
+    } catch (error) {
+      next(error)
     }
   },
 
@@ -95,8 +95,8 @@ module.exports = {
         }
       );
       return res.json(usuario);
-    } catch (err) {
-      next(err)
+    } catch (error) {
+      next(error)
     }
   },
 };

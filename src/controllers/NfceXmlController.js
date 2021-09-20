@@ -5,8 +5,8 @@ module.exports = {
     try {
       const xml = await NfceXml.findAll();
       return res.json(xml);
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   },
   async store(req, res, next) {
@@ -21,8 +21,6 @@ module.exports = {
         flglog,
       } = req.body;
 
-      const xml = xmlautorizado;
-
       const nfce_xml = await NfceXml.create({
         codnfce,
         seqnfce,
@@ -33,8 +31,8 @@ module.exports = {
         flglog,
       });
       return res.json(nfce_xml);
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   },
 };

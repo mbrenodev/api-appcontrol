@@ -8,8 +8,8 @@ const app = express();
 app.use(express.json());
 app.use(routes);
 
-app.use((err, _req, res, next) => {
-  res.status(400).json({ error: err.name });
+app.use((error, _req, res, next) => {
+  res.status(400).json({ error: error.name });
   next();
 });
 
