@@ -11,7 +11,7 @@ class Usuario extends Model {
           require: true,
         },
       identificacao: { type: DataTypes.STRING(50), unique: true, allowNull: false },
-      senha: DataTypes.STRING(50),
+      senha: DataTypes.STRING(255),
       sup: DataTypes.STRING(1),
       ativo: DataTypes.STRING(1),
       dica: DataTypes.STRING(50),

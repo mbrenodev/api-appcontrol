@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const Usuario = require("../models/Usuario");
 
 module.exports = {
@@ -6,15 +7,18 @@ module.exports = {
       const usuarios = await Usuario.findAll();
       return res.json(usuarios);
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 
-  async store(req, res, next ) {
+  async store(req, res, next) {
     try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.senha, salt);
+      const senha = hashedPassword;
+
       const {
         identificacao,
-        senha,
         sup: any, //é preciso alterar o nome da field pois super é uma palavra reservada.
         ativo,
         dica,
@@ -35,9 +39,10 @@ module.exports = {
         cliente_id,
         vendedor_id,
       });
+
       return res.json(usuario);
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 
@@ -53,16 +58,18 @@ module.exports = {
       await usuario.destroy(usuario_id);
       return res.json();
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 
   async update(req, res, next) {
     try {
       const { usuario_id } = req.params;
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(req.body.senha, salt);
+      const senha = hashedPassword;
       const {
         identificacao,
-        senha,
         sup: any,
         ativo,
         dica,
@@ -96,7 +103,7 @@ module.exports = {
       );
       return res.json(usuario);
     } catch (error) {
-      next(error)
+      next(error);
     }
   },
 };

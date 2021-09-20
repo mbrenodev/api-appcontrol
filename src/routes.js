@@ -2,6 +2,7 @@ const express = require("express");
 const GeneroController = require("./controllers/GeneroController");
 const FabricanteController = require("./controllers/FabricanteController");
 const UsuarioController = require("./controllers/UsuarioController");
+const UsuarioLoginController = require("./controllers/UsuarioLoginController");
 const TributoController = require("./controllers/TributoController");
 const GrupoProdutoController = require("./controllers/GrupoProdutoController");
 const ProdutoTipoItem = require("./controllers/ProdutoTipoItemController");
@@ -59,6 +60,8 @@ routes.get("/usuarios?", UsuarioController.index);
 routes.post("/usuarios?", UsuarioController.store);
 routes.put("/usuario/:usuario_id", UsuarioController.update);
 routes.delete("/usuario/:usuario_id", UsuarioController.delete);
+
+routes.post("/usuariologin", UsuarioLoginController.store);
 
 routes.get("/nfcexml", NfceXmlController.index);
 routes.post("/nfcexml", NfceXmlController.store);
