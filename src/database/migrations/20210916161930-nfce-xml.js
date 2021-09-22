@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       xmlautorizado: {
-        type: Sequelize.BLOB,
+        type: Sequelize.TEXT,
       },
       chnfce: {
         type: Sequelize.STRING(50),

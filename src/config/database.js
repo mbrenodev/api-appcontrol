@@ -5,6 +5,7 @@ module.exports = {
   username: process.env.LOGIN,
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
+  timezone: "-03:00",
 
 
   define: {

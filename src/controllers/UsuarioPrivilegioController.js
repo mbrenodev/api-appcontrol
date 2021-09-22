@@ -37,7 +37,7 @@ module.exports = {
     }
   },
 
-  async update(req, res) {
+  async update(req, res, next) {
     try {
       const { privilegio_id } = req.params;
       const {

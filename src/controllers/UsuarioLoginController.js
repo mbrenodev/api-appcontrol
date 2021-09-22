@@ -5,15 +5,15 @@ module.exports = {
   async store(req, res, next) {
     try {
       const { identificacao, senha } = req.body;
-
-      if(!identificacao || undefined || null){
-        return res.status(400).send("Usuario não encontrado")
+      const user = await Usuario.findOne({ identificacao, senha });
+      if (user === null || undefined) {
+        return res.status(400).send("Usuario não encontrado");
+      } else {
+        console.log(user.identificacao);
+        console.log(user.senha);
       }
 
-      const user = await Usuario.findByPk(usuario_id)
-      console.log(user)
-
-
+      // const senha = await bcrypt.compare(user.senha, hash);
     } catch (error) {
       next(error);
     }

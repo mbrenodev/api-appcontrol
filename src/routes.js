@@ -61,7 +61,7 @@ routes.post("/usuarios?", UsuarioController.store);
 routes.put("/usuario/:usuario_id", UsuarioController.update);
 routes.delete("/usuario/:usuario_id", UsuarioController.delete);
 
-routes.post("/usuariologin", UsuarioLoginController.store);
+routes.post("/login", UsuarioController.login);
 
 routes.get("/nfcexml", NfceXmlController.index);
 routes.post("/nfcexml", NfceXmlController.store);

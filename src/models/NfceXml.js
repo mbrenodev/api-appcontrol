@@ -14,7 +14,7 @@ class NfceXml extends Model {
           primaryKey: true,
           allowNull: false,
         },
-        xmlautorizado: DataTypes.BLOB,
+        xmlautorizado: DataTypes.TEXT,
         chnfce: DataTypes.STRING(50),
         loginusuario: DataTypes.STRING(20),
         codemp: DataTypes.INTEGER,
