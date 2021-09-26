@@ -1,7 +1,41 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const Usuario = require("../models/Usuario");
 
 module.exports = {
+  async session(req, res, next) {
+    const { identificacao, senha } = req.body;
+    const user = await Usuario.findAll({ where: { identificacao } });
+
+    try {
+      if (user.length === 1) {
+        if (await bcrypt.compare(senha, user[0].senha)) {
+          const token = jwt.sign(
+            { id: user[0].usuario_id },
+            process.env.APP_SECRET,
+            {
+              expiresIn: "1d",
+            }
+          );
+
+          const data = {
+            id: user[0].usuario_id,
+            name: user[0].identificacao,
+            token,
+          };
+
+          return res.json(data);
+        } else {
+          return res.status(404).json({ messege: "User not found" });
+        }
+      } else {
+        return res.status(404).json({ messege: "User not found" });
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
+
   async index(_req, res, next) {
     try {
       const usuarios = await Usuario.findAll();
@@ -12,10 +46,8 @@ module.exports = {
   },
 
   async store(req, res, next) {
-    try {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(req.body.senha, salt);
-      const senha = hashedPassword;
+    try {;
+      const hashedPassword = await bcrypt.hash(req.body.senha, 10);
 
       const {
         identificacao,
@@ -30,7 +62,7 @@ module.exports = {
 
       const usuario = await Usuario.create({
         identificacao,
-        senha,
+        senha: hashedPassword,
         sup: any, //é preciso alterar o nome da field pois super é uma palavra reservada.
         ativo,
         dica,
@@ -46,7 +78,7 @@ module.exports = {
     }
   },
 
-  async delete(req, res, next) {
+  async delet(req, res, next) {
     try {
       const { usuario_id } = req.params;
       const usuario = await Usuario.findByPk(usuario_id);
@@ -102,23 +134,6 @@ module.exports = {
         }
       );
       return res.json(usuario);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  async login(req, res, next) {
-    try {
-      const { identificacao, senha } = req.body;
-      const user = await Usuario.findOne({ identificacao, senha });
-      if (user === null || undefined) {
-        return res.status(400).send("Usuario não encontrado");
-      } else {
-        console.log(user.identificacao);
-        console.log(user.senha);
-      }
-      // const senha = await bcrypt.compare(user.senha, hash);
-
     } catch (error) {
       next(error);
     }

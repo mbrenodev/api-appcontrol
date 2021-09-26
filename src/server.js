@@ -6,6 +6,7 @@ require("./database");
 const app = express();
 
 app.use(express.json());
+
 app.use(routes);
 
 app.use((error, _req, res, next) => {
@@ -14,5 +15,5 @@ app.use((error, _req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log("API Start");
+  console.log(`API-Start ===> Port ${process.env.PORT}`);
 });

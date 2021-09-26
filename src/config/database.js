@@ -7,7 +7,6 @@ module.exports = {
   database: process.env.DATABASE,
   timezone: "-03:00",
 
-
   define: {
     timestamps: true,
     underscored: true,

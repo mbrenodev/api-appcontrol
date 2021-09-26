@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require("express")
+const { auth } = require("./middlewares/auth");
 const GeneroController = require("./controllers/GeneroController");
 const FabricanteController = require("./controllers/FabricanteController");
-const UsuarioController = require("./controllers/UsuarioController");
-const UsuarioLoginController = require("./controllers/UsuarioLoginController");
+const { index, store, update, delet, session} = require("./controllers/UsuarioController");
 const TributoController = require("./controllers/TributoController");
 const GrupoProdutoController = require("./controllers/GrupoProdutoController");
 const ProdutoTipoItem = require("./controllers/ProdutoTipoItemController");
@@ -13,6 +13,21 @@ const ProgramaController = require("./controllers/ProgramaController");
 const NfceXmlController = require("./controllers/NfceXmlController");
 
 const routes = express.Router();
+
+
+routes.post("/session", session);
+
+routes.use(auth)
+
+
+routes.get("/usuarios?", index);
+routes.post("/usuarios?", store);
+routes.put("/usuario/:usuario_id", update);
+routes.delete("/usuario/:usuario_id", delet);
+
+
+
+
 
 routes.get("/produtos", ProdutoController.index);
 routes.post("/produtos", ProdutoController.store);
@@ -56,12 +71,7 @@ routes.post("/generos", GeneroController.store);
 routes.put("/genero/:genero_id", GeneroController.update);
 routes.delete("/genero/:genero_id", GeneroController.delete);
 
-routes.get("/usuarios?", UsuarioController.index);
-routes.post("/usuarios?", UsuarioController.store);
-routes.put("/usuario/:usuario_id", UsuarioController.update);
-routes.delete("/usuario/:usuario_id", UsuarioController.delete);
 
-routes.post("/login", UsuarioController.login);
 
 routes.get("/nfcexml", NfceXmlController.index);
 routes.post("/nfcexml", NfceXmlController.store);
