@@ -37,7 +37,6 @@ Tributo.associate(connection.models);
 Programa.associate(connection.models);
 Fabricante.associate(connection.models);
 GrupoProduto.associate(connection.models);
-// UsuarioLogin.associate(connection.models);
 UsuarioPrivilegio.associate(connection.models);
 UnidadeMedida.associate(connection.models);
 ProdutoTipoItem.associate(connection.models);

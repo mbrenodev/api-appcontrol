@@ -35,4 +35,12 @@ module.exports = {
       next(error);
     }
   },
+
+  async report(req, res, next) {
+    const { data_inicial, data_final } = req.body;
+    const xml = await NfceXml.findAll({ 
+      where: { xmlautorizado } 
+    });
+    console.log(xml.xmlautorizado);
+  },
 };
