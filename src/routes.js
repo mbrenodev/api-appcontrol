@@ -17,7 +17,11 @@ const routes = express.Router();
 
 routes.post("/session", session);
 
+<<<<<<< HEAD
 routes.use(auth);
+=======
+routes.use(auth)
+>>>>>>> fab30b52d3300860ddcb4ae9e6bf25a64369515c
 
 
 routes.get("/usuarios?", index);
@@ -25,6 +29,13 @@ routes.post("/usuarios?", store);
 routes.put("/usuario/:usuario_id", update);
 routes.delete("/usuario/:usuario_id", delet);
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> fab30b52d3300860ddcb4ae9e6bf25a64369515c
 routes.get("/produtos", ProdutoController.index);
 routes.post("/produtos", ProdutoController.store);
 routes.put("/produto/:produto_id", ProdutoController.update);
@@ -67,6 +78,11 @@ routes.post("/generos", GeneroController.store);
 routes.put("/genero/:genero_id", GeneroController.update);
 routes.delete("/genero/:genero_id", GeneroController.delete);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fab30b52d3300860ddcb4ae9e6bf25a64369515c
 routes.get("/nfcexml", NfceXmlController.index);
 routes.post("/nfcexml", NfceXmlController.store);
 routes.post("/report", NfceXmlController.report);
