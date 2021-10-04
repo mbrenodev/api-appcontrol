@@ -16,7 +16,7 @@ const routes = express.Router();
 
 routes.post("/session", session);
 
-routes.use(auth);
+routes.use(auth)
 
 routes.get("/usuarios?", index);
 routes.post("/usuarios?", store);
