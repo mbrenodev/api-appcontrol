@@ -2,7 +2,7 @@ const express = require("express")
 const { auth } = require("./middlewares/auth");
 const GeneroController = require("./controllers/GeneroController");
 const FabricanteController = require("./controllers/FabricanteController");
-const UsuarioController = require("./controllers/UsuarioController");
+const { index, store, update, delet, session} = require("./controllers/UsuarioController");
 const TributoController = require("./controllers/TributoController");
 const GrupoProdutoController = require("./controllers/GrupoProdutoController");
 const ProdutoTipoItem = require("./controllers/ProdutoTipoItemController");
@@ -16,12 +16,12 @@ const routes = express.Router();
 
 routes.post("/session", session);
 
-// routes.use(auth)
+routes.use(auth)
 
-routes.get("/usuarios?", UsuarioController.index);
-routes.post("/usuarios?", UsuarioController.store);
-routes.put("/usuario/:usuario_id", UsuarioController.update);
-routes.delete("/usuario/:usuario_id", UsuarioController.delete);
+routes.get("/usuarios?", index);
+routes.post("/usuarios?", store);
+routes.put("/usuario/:usuario_id", update);
+routes.delete("/usuario/:usuario_id", delet);
 
 routes.get("/produtos", ProdutoController.index);
 routes.post("/produtos", ProdutoController.store);
