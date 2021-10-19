@@ -78,7 +78,7 @@ module.exports = {
     }
   },
 
-  async delete(req, res, next) {
+  async delet(req, res, next) {
     try {
       const { usuario_id } = req.params;
       const usuario = await Usuario.findByPk(usuario_id);
